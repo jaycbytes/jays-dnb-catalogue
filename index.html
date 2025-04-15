@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LA TV Shows | Home</title>
+    <title>Jay's D&B Catalogue</title>
     <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
   </head>
 
   <body>
     <header class="main-header">
-      <h1 class="title">LA TV Shows</h1>
+      <h1>Jay's D&B Catalogue</h1>
     </header>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
-      <div class="card-content">
-        <h2>TV Show Title</h2>
-        <img src="" alt="TV Show Poster" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
-        </ul>
+    <main>
+      <div class="controls">
+        <input type="text" id="search-input" placeholder="Search games..." />
+
+        <select id="filter-type">
+          <option value="">All Game Types</option>
+        </select>
+
+        <select id="filter-category">
+          <option value="">All Categories</option>
+        </select>
+
+        <select id="sort-by">
+          <option value="name">Sort by Name</option>
+          <option value="cost">Sort by Cost</option>
+          <option value="value">Sort by Value</option>
+          <option value="payout">Sort by Payout</option>
+        </select>
       </div>
-    </div>
-    <div class="footer">
-      <button onclick="quoteAlert();">Get A Quote!</button>
-      <button onclick="removeLastCard();">Remove A Card!</button>
-    </div>
+
+      <div id="games-container" class="grid-view">
+        <!-- this empty container will be used with JS to display the game cards -->
+      </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="scripts.js"></script>
   </body>
 </html>
