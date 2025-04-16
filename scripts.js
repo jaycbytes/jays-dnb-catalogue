@@ -64,6 +64,17 @@ const downBtn = document.getElementById('down-btn');
 const selectBtn = document.getElementById('select-btn');
 const resetBtn = document.getElementById('reset-btn');
 
+// hopefully fixes assets not loading
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.location.hostname.includes('github.io')) {
+    gamesData.forEach(game => {
+      if (game.imagePath) {
+        game.imagePath = '/jays-dnb-catalog/' + game.imagePath;
+      }
+    });
+  }
+});
+
 
 // initialization to how it should look when it starts.
 function init() {
