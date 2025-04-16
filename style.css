@@ -1,3 +1,20 @@
+
+/* Learned using :root allows for defining string color values also could've. css global variables */
+:root {
+  /* Neon color palette based on the arcade cabinet image */
+  --neon-pink: #ff3cb4;
+  --neon-blue: #00fbff;
+  --neon-purple: #b70da6;
+  --neon-yellow: #fffc4a;
+  --background-dark: #120025;
+  --background-medium: #2a0049;
+  --text-light: #ffffff;
+  --text-shadow: 0 0 7px var(--neon-blue), 0 0 10px var(--neon-blue);
+  --box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-blue);
+}
+
+
+
 * {
   margin: 0;
   padding: 0;

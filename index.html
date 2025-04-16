@@ -2,38 +2,68 @@
 <html>
   <head>
     <title>Jay's D&B Catalogue</title>
-    <meta name="description" content="A Catalog of Shows Set in Los Angeles" />
+    <meta name="description" content="A Catalog of Arcade Games from Dave & Buster" />
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <header class="main-header">
-      <h1>Jay's D&B Catalogue</h1>
-    </header>
-    <main>
-      <div class="controls">
-        <input type="text" id="search-input" placeholder="Search games..." />
+    <!--A structure for the arcade cabinet UI idea-->
+    <div class="arcade-cabinet">
+      <!-- Header or forehad of arcade machine-->
+      <header class="cabinet-header">
+          <div class="neon-title">Jay's D&B Catalogue</div>
+      </header>
 
-        <select id="filter-type">
-          <option value="">All Game Types</option>
-        </select>
+        <!-- Main game screen area -->
+        <main class="cabinet-screen">
+            <!-- View toggle buttons -->
+            <div class="view-toggle">
+                <button id="grid-view-btn" class="active">Grid View</button>
+                <button id="list-view-btn">List View</button>
+            </div>
+            
+            <!-- Screen frame -->
+            <div class="screen-frame">
+                <!-- Games display area -->
+                <div id="games-container" class="grid-view"></div>
+            </div>
+        </main>
 
-        <select id="filter-category">
-          <option value="">All Categories</option>
-        </select>
+        <!-- Control panel area -->
+        <div class="control-panel">
+            <div class="controls-wrapper">
+                <!-- Filter controls -->
+                <div class="filter-container">
+                    <input type="text" id="search-input" placeholder="Search games...">
+                    
+                    <select id="filter-type">
+                        <option value="">Game Types</option>
+                        <!-- will be filled with js-->
+                    </select>
+                    
+                    <select id="filter-category">
+                        <option value="">Categories</option>
+                        <!-- eventually filled with JS-->
+                    </select>
+                    
+                    <select id="sort-by">
+                        <option value="name">Sort by Name</option>
+                        <option value="cost">Sort by Cost</option>
+                        <option value="value">Sort by Value</option>
+                        <option value="payout">Sort by Payout</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-        <select id="sort-by">
-          <option value="name">Sort by Name</option>
-          <option value="cost">Sort by Cost</option>
-          <option value="value">Sort by Value</option>
-          <option value="payout">Sort by Payout</option>
-        </select>
-      </div>
-
-      <div id="games-container" class="grid-view">
-        <!-- this empty container will be used with JS to display the game cards -->
-      </div>
-    </main>
+        <!-- the bottom part of the arcade cabinet machine -->
+        <div class="cabinet-base">
+            <!-- div for gaim details -->
+            <div id="game-details" class="game-info-display">
+                <!-- my data.js game info will appear here -->
+                <p class="select-prompt">Select a game to see details!</p>
+            </div>
+        </div>
+    </div>
 
     <script src="data.js"></script>
     <script src="scripts.js"></script>
