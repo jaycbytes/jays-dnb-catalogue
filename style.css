@@ -55,6 +55,7 @@ body {
   color: var(--neon-pink);
   text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
   letter-spacing: 2px;
+  animation: neon-flicker 2s infinite alternate;
 }
 
 /*  the main screen area */
@@ -195,6 +196,165 @@ body {
   font-size: 0.85em;
 }
 
+/* Screen frame to simulate a fun arcade screen */
+.screen-frame {
+  background-color: #000;
+  border: 4px solid var(--neon-purple);
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 0 20px var(--neon-purple);
+  max-height: 550px;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+/* Pages controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.pagination-controls button {
+  background-color: var(--background-medium);
+  color: var(--text-light);
+  border: 2px solid var(--neon-blue);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: var(--neon-blue);
+  color: var(--background-dark);
+}
+
+#page-indicator {
+  color: var(--neon-yellow);
+  font-weight: bold;
+}
+
+
+/* Games display styles */
+#games-container {
+  transition: all 0.3s ease;
+  min-height: 400px;
+}
+
+.grid-view {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* Game card css rules*/
+.game-card {
+  background-color: var(--background-medium);
+  border: 2px solid var(--neon-blue);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+
+.game-card.selected {
+  border: 3px solid var(--neon-yellow);
+  box-shadow: 0 0 15px var(--neon-yellow);
+}
+
+.grid-view .game-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.list-view .game-card {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  align-items: center;
+  padding: 10px;
+}
+
+.game-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-bottom: 2px solid var(--neon-blue);
+  background-color: var(--background-dark);
+}
+
+.list-view .game-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border: 1px solid var(--neon-blue);
+}
+
+.game-header {
+  padding: 10px;
+  background-color: var(--neon-purple);
+  color: var(--text-light);
+  text-align: center;
+}
+
+.list-view .game-header {
+  background-color: transparent;
+}
+
+.game-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-body {
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.game-type, .game-category {
+  display: inline-block;
+  background-color: var(--neon-blue);
+  color: var(--background-dark);
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 0.7em;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.game-category {
+  background-color: var(--neon-pink);
+}
+
+.game-cost, .game-value, .game-payout {
+  margin: 5px 0;
+  font-size: 0.85em;
+}
+
+
 /* center control panel styling*/
 .control-panel {
   padding: 20px;
@@ -210,12 +370,60 @@ body {
   margin: 0 auto;
 }
 
+/* CSS STYLING FOR THE ACTION BUTTONS*/
+.action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.action-btn {
+  background-color: var(--neon-pink);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 0.7em;
+  cursor: pointer;
+  box-shadow: 0 0 5px var(--neon-pink);
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.action-btn.reset {
+  background-color: var(--neon-yellow);
+  color: var(--background-dark);
+  box-shadow: 0 0 5px var(--neon-yellow);
+}
+
+.action-btn.reset:hover {
+  box-shadow: 0 0 15px var(--neon-yellow);
+}
+
+
+
 /* Search and filter controls */
+.controls-right {
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.search-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .filter-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  width: 100%;
 }
 
 #search-input, select {
@@ -234,7 +442,6 @@ body {
 }
 
 #search-input {
-  flex-grow: 1;
   width: 100%;
 }
 
@@ -249,8 +456,9 @@ select option {
   color: var(--text-light);
 }
 
-/* Bottom part of cabinet where game information is displayed*/
 
+
+/* the bottom area of the arcade cabinet, rules for coin slot and game details info/det area*/
 .cabinet-base {
   padding: 20px;
   background-color: var(--background-medium);
@@ -258,10 +466,35 @@ select option {
   justify-content: center;
 }
 
+.coin-slot {
+  width: 100px;
+  height: 150px;
+  background-color: var(--background-dark);
+  border: 2px solid var(--neon-yellow);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: perspective(500px) rotateY(-15deg);
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.coin-slot-insert {
+  background-color: var(--neon-yellow);
+  color: var(--background-dark);
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  font-weight: bold;
+  transform: rotate(-90deg);
+  animation: coin-glow 1.5s infinite alternate;
+}
+
 /* Game details display */
 .game-info-display {
   flex-grow: 1;
-  max-width: 800px;
+  margin-left: 20px;
   background-color: var(--background-dark);
   border: 2px solid var(--neon-blue);
   border-radius: 5px;
@@ -269,6 +502,18 @@ select option {
   min-height: 150px;
   max-height: 250px;
   overflow: auto;
+}
+
+.game-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.game-info-text {
+  flex: 1;
 }
 
 .game-info-display h2 {
@@ -295,10 +540,53 @@ select option {
   margin-top: 40px;
 }
 
+.features-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.features-list li {
+  background-color: rgba(0, 251, 255, 0.2);
+  border: 1px solid var(--neon-blue);
+  border-radius: 15px;
+  padding: 3px 8px;
+  font-size: 0.85em;
+  color: var(--neon-blue);
+}
 /* Value rating stars */
 .value-stars {
   color: var(--neon-yellow);
   letter-spacing: 2px;
+}
+
+/* css rules for flickering "strobing" header/forehead of arcade cabinet */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink);
+  }
+  20%, 24%, 55% {
+      text-shadow: none;
+  }
+}
+
+@keyframes coin-glow {
+  from {
+      box-shadow: 0 0 5px var(--neon-yellow);
+  }
+  to {
+      box-shadow: 0 0 15px var(--neon-yellow), 0 0 20px var(--neon-yellow);
+  }
+}
+
+/* No results message */
+.no-results {
+  text-align: center;
+  color: var(--neon-pink);
+  font-size: 1.2em;
+  margin-top: 20px;
 }
 
 /* Used references and AI assistance for responsive css and other aesthetic features*/
@@ -318,7 +606,31 @@ select option {
       gap: 20px;
   }
   
+  .coin-slot {
+      width: 80%;
+      height: 80px;
+      flex-direction: row;
+      transform: none;
+  }
+  
+  .coin-slot-insert {
+      transform: none;
+  }
+  
   .game-info-display {
+      width: 100%;
+      margin-left: 0;
+  }
+  
+  .game-details-container {
+      flex-direction: column-reverse;
+  }
+  
+  .list-view .game-card {
+      grid-template-columns: 70px 1fr;
+  }
+  
+  .controls-right {
       width: 100%;
   }
 }
