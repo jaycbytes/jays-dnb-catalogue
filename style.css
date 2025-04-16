@@ -1,7 +1,5 @@
-
-/* Learned using :root allows for defining string color values also could've. css global variables */
+/* the css "global variables" */
 :root {
-  /* Neon color palette based on the arcade cabinet image */
   --neon-pink: #ff3cb4;
   --neon-blue: #00fbff;
   --neon-purple: #b70da6;
@@ -13,8 +11,6 @@
   --box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-blue);
 }
 
-
-
 * {
   margin: 0;
   padding: 0;
@@ -23,62 +19,316 @@
 }
 
 body {
-  background-color: #222;
-  color: #fff;
-  padding: 20px;
-}
-
-header {
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  color: #0078d7;
-}
-
-.controls {
+  background-color: var(--background-dark);
+  color: var(--text-light);
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-#search-input, select {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #444;
-  background-color: #333;
-  color: #fff;
+/* Arcade Cabinet Structure */
+.arcade-cabinet {
+  width: 100%;
+  max-width: 1000px;
+  background-color: var(--background-medium);
+  border: 4px solid var(--neon-pink);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-#search-input {
-  flex-grow: 1;
+/* forehead of arcade machine area */
+.cabinet-header {
+  padding: 20px;
+  background-color: var(--background-dark);
+  border-bottom: 4px solid var(--neon-blue);
+  text-align: center;
 }
-/* testing with this grid division first*/
+
+.neon-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+  letter-spacing: 2px;
+}
+
+/*  the main screen area */
+.cabinet-screen {
+  padding: 20px;
+  background-color: var(--background-dark);
+  border-bottom: 4px solid var(--neon-blue);
+}
+
+.view-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.view-toggle button {
+  background-color: var(--background-medium);
+  color: var(--text-light);
+  border: 2px solid var(--neon-blue);
+  padding: 8px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.view-toggle button:hover {
+  background-color: var(--neon-purple);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.view-toggle button.active {
+  background-color: var(--neon-blue);
+  color: var(--background-dark);
+  font-weight: bold;
+}
+
+/* the Screen frame that is meant to simulate the fron pov of one of the D&B arcades*/
+.screen-frame {
+  background-color: #000;
+  border: 4px solid var(--neon-purple);
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 0 20px var(--neon-purple);
+  max-height: 550px;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+/* Games display styles */
+#games-container {
+  transition: all 0.3s ease;
+  min-height: 400px;
+}
+
 .grid-view {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
-/* initial rules for the cards that will hold game info*/
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Game cards */
 .game-card {
-  background-color: #333;
+  background-color: var(--background-medium);
+  border: 2px solid var(--neon-blue);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+
+.game-card.selected {
+  border: 3px solid var(--neon-yellow);
+  box-shadow: 0 0 15px var(--neon-yellow);
 }
 
 .game-image {
   width: 100%;
-  height: 150px;
+  height: 120px;
   object-fit: cover;
+  border-bottom: 2px solid var(--neon-blue);
+  background-color: var(--background-dark);
+}
+
+.list-view .game-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border: 1px solid var(--neon-blue);
 }
 
 .game-name {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-body {
   padding: 10px;
+  flex-grow: 1;
+}
+
+.game-type, .game-category {
+  display: inline-block;
+  background-color: var(--neon-blue);
+  color: var(--background-dark);
+  padding: 3px 8px;
+  border-radius: 15px;
+  font-size: 0.7em;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.game-category {
+  background-color: var(--neon-pink);
+}
+
+.game-cost, .game-value, .game-payout {
+  margin: 5px 0;
+  font-size: 0.85em;
+}
+
+/* center control panel styling*/
+.control-panel {
+  padding: 20px;
+  background-color: var(--background-medium);
+  border-bottom: 4px solid var(--neon-blue);
+}
+
+.controls-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Search and filter controls */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+#search-input, select {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 2px solid var(--neon-blue);
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#search-input:focus, select:focus {
+  outline: none;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+#search-input {
+  flex-grow: 1;
+  width: 100%;
+}
+
+select {
+  flex: 1;
+  min-width: 90px;
+  cursor: pointer;
+}
+
+select option {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+}
+
+/* Bottom part of cabinet where game information is displayed*/
+
+.cabinet-base {
+  padding: 20px;
+  background-color: var(--background-medium);
+  display: flex;
+  justify-content: center;
+}
+
+/* Game details display */
+.game-info-display {
+  flex-grow: 1;
+  max-width: 800px;
+  background-color: var(--background-dark);
+  border: 2px solid var(--neon-blue);
+  border-radius: 5px;
+  padding: 15px;
+  min-height: 150px;
+  max-height: 250px;
+  overflow: auto;
+}
+
+.game-info-display h2 {
+  color: var(--neon-pink);
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.game-info-section {
+  margin-bottom: 15px;
+}
+
+.game-info-section h3 {
+  color: var(--neon-blue);
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--neon-blue);
+  padding-bottom: 3px;
+}
+
+.select-prompt {
   text-align: center;
+  color: var(--neon-yellow);
+  font-style: italic;
+  margin-top: 40px;
+}
+
+/* Value rating stars */
+.value-stars {
+  color: var(--neon-yellow);
+  letter-spacing: 2px;
+}
+
+/* Used references and AI assistance for responsive css and other aesthetic features*/
+@media (max-width: 768px) {
+  .controls-wrapper {
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  .grid-view {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .cabinet-base {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  
+  .game-info-display {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-view {
+      grid-template-columns: 1fr;
+  }
+  
+  .neon-title {
+      font-size: 2rem;
+  }
 }
