@@ -5,36 +5,63 @@
     <meta name="description" content="A Catalog of Arcade Games from Dave & Buster" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <!--A structure for the arcade cabinet UI idea-->
-    <div class="arcade-cabinet">
-      <!-- Header or forehad of arcade machine-->
-      <header class="cabinet-header">
-          <div class="neon-title">Jay's D&B Catalogue</div>
-      </header>
 
-        <!-- Main game screen area -->
-        <main class="cabinet-screen">
-            <!-- View toggle buttons -->
-            <div class="view-toggle">
-                <button id="grid-view-btn" class="active">Grid View</button>
-                <button id="list-view-btn">List View</button>
-            </div>
-            
-            <!-- Screen frame -->
-            <div class="screen-frame">
-                <!-- Games display area -->
-                <div id="games-container" class="grid-view"></div>
-            </div>
-        </main>
-
-        <!-- Control panel area -->
+        <body>
+          <!--A structure for the arcade cabinet UI idea-->
+          <div class="arcade-cabinet">
+              <!-- Header or forehad of arcade machine-->
+              <header class="cabinet-header">
+                  <div class="neon-title">Jay's D&B Catalogue</div>
+              </header>
+      
+              <!-- Main game screen area -->
+              <main class="cabinet-screen">
+                  <!-- View toggle buttons -->
+                  <div class="view-toggle">
+                      <button id="grid-view-btn" class="active">Grid View</button>
+                      <button id="list-view-btn">List View</button>
+                  </div>
+                  
+                  <!-- Screen frame -->
+                  <div class="screen-frame">
+                      <!-- Games display area -->
+                      <div id="games-container" class="grid-view"></div>
+                      
+                      <!-- Pagination controls -->
+                      <div class="pagination-controls">
+                          <button id="prev-page-btn">◀ Prev</button>
+                          <span id="page-indicator">Page 1 of 4</span>
+                          <button id="next-page-btn">Next ▶</button>
+                      </div>
+                  </div>
+              </main>
+<!--structure for whole control panel including dmenu controls to maneuver through game cards-->
         <div class="control-panel">
-            <div class="controls-wrapper">
+          <div class="controls-wrapper">
+              <div class="controls-left">
+                  <!-- D-pad -->
+                  <div class="d-pad">
+                      <button id="up-btn" class="d-pad-btn up">▲</button>
+                      <button id="left-btn" class="d-pad-btn left">◀</button>
+                      <button id="right-btn" class="d-pad-btn right">▶</button>
+                      <button id="down-btn" class="d-pad-btn down">▼</button>
+                      <div class="d-pad-center"></div>
+                  </div>
+                  <!-- Action buttons -->
+                  <div class="action-buttons">
+                      <button id="select-btn" class="action-btn">SELECT</button>
+                      <button id="reset-btn" class="action-btn reset">RESET</button>
+                  </div>
+              </div>
+              
+              <div class="controls-right">
+                  <!-- Search control -->
+                  <div class="search-container">
+                      <input type="text" id="search-input" placeholder="Search games...">
+                  </div> 
+
                 <!-- Filter controls -->
                 <div class="filter-container">
-                    <input type="text" id="search-input" placeholder="Search games...">
-                    
                     <select id="filter-type">
                         <option value="">Game Types</option>
                         <!-- will be filled with js-->
@@ -44,7 +71,7 @@
                         <option value="">Categories</option>
                         <!-- eventually filled with JS-->
                     </select>
-                    
+
                     <select id="sort-by">
                         <option value="name">Sort by Name</option>
                         <option value="cost">Sort by Cost</option>
@@ -56,7 +83,10 @@
         </div>
 
         <!-- the bottom part of the arcade cabinet machine -->
-        <div class="cabinet-base">
+          <div class="cabinet-base">
+            <div class="coin-slot">
+                <div class="coin-slot-insert">INSERT COIN</div>
+            </div>
             <!-- div for gaim details -->
             <div id="game-details" class="game-info-display">
                 <!-- my data.js game info will appear here -->
