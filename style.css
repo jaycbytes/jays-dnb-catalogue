@@ -155,6 +155,32 @@ body {
   background-color: var(--background-dark);
 }
 
+.game-image-placeholder {
+  width: 100%;
+  height: 120px;
+  background-color: var(--background-dark);
+  border-bottom: 2px solid var(--neon-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--neon-blue);
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.game-image-placeholder::after {
+  content: "Image Coming Soon";
+  font-size: 0.9em;
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.list-view-placeholder {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border: 1px solid var(--neon-blue);
+}
+
 .list-view .game-image {
   width: 70px;
   height: 70px;
@@ -300,6 +326,32 @@ body {
   object-fit: cover;
   border-bottom: 2px solid var(--neon-blue);
   background-color: var(--background-dark);
+}
+
+.game-image-placeholder {
+  width: 100%;
+  height: 120px;
+  background-color: var(--background-dark);
+  border-bottom: 2px solid var(--neon-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--neon-blue);
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.game-image-placeholder::after {
+  content: "Image Coming Soon";
+  font-size: 0.9em;
+  text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.list-view-placeholder {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border: 1px solid var(--neon-blue);
 }
 
 .list-view .game-image {
@@ -504,6 +556,23 @@ select option {
   overflow: auto;
 }
 
+.game-info-image {
+  max-width: 120px;
+  max-height: 120px;
+  border: 2px solid var(--neon-pink);
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--neon-pink);
+  object-fit: contain;
+}
+
+.game-image-container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
 .game-details-container {
   display: flex;
   flex-direction: row;
@@ -560,6 +629,87 @@ select option {
 .value-stars {
   color: var(--neon-yellow);
   letter-spacing: 2px;
+}
+
+
+/* dpad style rules */
+.d-pad {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.d-pad-btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: var(--background-dark);
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.d-pad-btn:hover {
+  background-color: var(--neon-blue);
+  color: var(--background-dark);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.d-pad-btn.up {
+  top: 0;
+  left: 40px;
+  border-radius: 5px 5px 0 0;
+}
+
+.d-pad-btn.left {
+  top: 40px;
+  left: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+.d-pad-btn.right {
+  top: 40px;
+  right: 0;
+  border-radius: 0 5px 5px 0;
+}
+
+.d-pad-btn.down {
+  bottom: 0;
+  left: 40px;
+  border-radius: 0 0 5px 5px;
+}
+
+.d-pad-center {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--background-dark);
+  border: 2px solid var(--neon-blue);
+}
+
+.controls-left, .controls-right {
+  display: flex;
+  align-items: center;
+}
+
+.controls-left {
+  flex-direction: column;
+  gap: 15px;
+}
+
+.controls-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* css rules for flickering "strobing" header/forehead of arcade cabinet */
