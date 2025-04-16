@@ -23,75 +23,72 @@
  *
  */
 
-const FRESH_PRINCE_URL =
-  "https://upload.wikimedia.org/wikipedia/en/3/33/Fresh_Prince_S1_DVD.jpg";
-const CURB_POSTER_URL =
-  "https://m.media-amazon.com/images/M/MV5BZDY1ZGM4OGItMWMyNS00MDAyLWE2Y2MtZTFhMTU0MGI5ZDFlXkEyXkFqcGdeQXVyMDc5ODIzMw@@._V1_FMjpg_UX1000_.jpg";
-const EAST_LOS_HIGH_POSTER_URL =
-  "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
-// This is an array of strings (TV show titles)
-let titles = [
-  "Fresh Prince of Bel Air",
-  "Curb Your Enthusiasm",
-  "East Los High",
-];
-// Your final submission should have much more data than this, and
-// you should use more than just an array of strings to store it all.
 
-// This function adds cards the page to display the data in the array
-function showCards() {
-  const cardContainer = document.getElementById("card-container");
-  cardContainer.innerHTML = "";
-  const templateCard = document.querySelector(".card");
+// creating my DOM objects to use later 
+const gamesContainer = document.getElementById('games-container');
 
-  for (let i = 0; i < titles.length; i++) {
-    let title = titles[i];
+const searchInput = document.getElementById('search-input');
 
-    // This part of the code doesn't scale very well! After you add your
-    // own data, you'll need to do something totally different here.
-    let imageURL = "";
-    if (i == 0) {
-      imageURL = FRESH_PRINCE_URL;
-    } else if (i == 1) {
-      imageURL = CURB_POSTER_URL;
-    } else if (i == 2) {
-      imageURL = EAST_LOS_HIGH_POSTER_URL;
-    }
+const filterType = document.getElementById('filter-type');
+const filterCategory = document.getElementById('filter-category');
 
-    const nextCard = templateCard.cloneNode(true); // Copy the template card
-    editCardContent(nextCard, title, imageURL); // Edit title and image
-    cardContainer.appendChild(nextCard); // Add new card to the container
-  }
+const sortBy = document.getElementById('sort-by');
+
+
+// initialization to how it should look when it starts.
+function init() {
+    // filling up filter to not have it empty
+    populateFilterOptions();
+    
+    // calling render function to actually show games on screen to user
+    renderGames(gamesData);
 }
 
-function editCardContent(card, newTitle, newImageURL) {
-  card.style.display = "block";
+// filling filter drop down options
+function populateFilterOptions() {
+    // using map to make new array that consists of only my game types
+    const types = [...new Set(gamesData.map(game => game.type))];
 
-  const cardHeader = card.querySelector("h2");
-  cardHeader.textContent = newTitle;
-
-  const cardImage = card.querySelector("img");
-  cardImage.src = newImageURL;
-  cardImage.alt = newTitle + " Poster";
-
-  // You can use console.log to help you debug!
-  // View the output by right clicking on your website,
-  // select "Inspect", then click on the "Console" tab
-  console.log("new card:", newTitle, "- html: ", card);
+    types.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        // filling option with type from mapped over arry.
+        option.textContent = type;
+        filterType.appendChild(option);
+    });
+    
+    // same map idea but now extracting category key and making new array with it.
+    const categories = [...new Set(gamesData.map(game => game.category))];
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        filterCategory.appendChild(option);
+    });
 }
 
-// This calls the addCards() function when the page is first loaded
-document.addEventListener("DOMContentLoaded", showCards);
-
-function quoteAlert() {
-  console.log("Button Clicked!");
-  alert(
-    "I guess I can kiss heaven goodbye, because it got to be a sin to look this good!"
-  );
+// what i'll call when it's time to show the actual cards on screen.
+function renderGames(games) {
+    // Clear container
+    gamesContainer.innerHTML = '';
+    
+    // Create game cards
+    games.forEach(game => {
+        const gameCard = document.createElement('div');
+        gameCard.className = 'game-card';
+        
+        
+        const imageOfGame = ``;
+        
+        gameCard.innerHTML = `
+            <img src="${imageofGame}" alt="${game.name}" class="game-image">
+            <h2 class="game-name">${game.name}</h2>
+        `;
+        
+        gamesContainer.appendChild(gameCard);
+    });
 }
 
-function removeLastCard() {
-  titles.pop(); // Remove last item in titles array
-  showCards(); // Call showCards again to refresh
-}
+// running my init function to get things going the moment event listener is triggered.
+document.addEventListener('DOMContentLoaded', init);
