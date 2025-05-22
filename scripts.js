@@ -68,13 +68,14 @@ const resetBtn = document.getElementById('reset-btn');
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.hostname.includes('github.io')) {
     gamesData.forEach(game => {
-      if (game.imagePath) {
+      if (game.imagePath && !game.imagePath.startsWith('/jays-dnb-catalog/') {
         game.imagePath = '/jays-dnb-catalog/' + game.imagePath;
       }
     });
   }
+  // Call init after path modification
+  init();
 });
-
 
 // initialization to how it should look when it starts.
 function init() {
@@ -581,6 +582,3 @@ function displayGameDetails(gameId) {
         gameDetails.style.opacity = 1;
     }, 100);
 }
-
-// running my init function to get things going the moment event listener is triggered.
-document.addEventListener('DOMContentLoaded', init);
