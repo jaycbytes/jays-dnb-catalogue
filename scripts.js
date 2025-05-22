@@ -68,8 +68,8 @@ const resetBtn = document.getElementById('reset-btn');
 document.addEventListener('DOMContentLoaded', function() {
   if (window.location.hostname.includes('github.io')) {
     gamesData.forEach(game => {
-      if (game.imagePath && !game.imagePath.startsWith('/jays-dnb-catalog/') {
-        game.imagePath = '/jays-dnb-catalog/' + game.imagePath;
+      if (game.imagePath && !game.imagePath.startsWith('/jays-dnb-catalogue/')) {
+        game.imagePath = '/jays-dnb-catalogue/' + game.imagePath;
       }
     });
   }
@@ -363,7 +363,7 @@ function flashDPadButton(direction) {
   }
 }
 
-// Create a game card element
+// Create a game card element with image error handling
 function createGameCard(game, index) {
   const gameCard = document.createElement('div');
   gameCard.className = 'game-card';
@@ -376,7 +376,8 @@ function createGameCard(game, index) {
   if (currentView === 'grid') {
       // Grid view card layout
       const imageElement = imageSrc ? 
-            `<img src="${imageSrc}" alt="${game.name}" class="game-image">` : 
+            `<img src="${imageSrc}" alt="${game.name}" class="game-image">
+             <div class="game-image-placeholder" style="display:none;"></div>` : 
             `<div class="game-image-placeholder"></div>`;
       
       // creating the grid html layout
@@ -398,7 +399,8 @@ function createGameCard(game, index) {
   } else {
       // List view card layout
       const imageElement = imageSrc ? 
-            `<img src="${imageSrc}" alt="${game.name}" class="game-image">` : 
+            `<img src="${imageSrc}" alt="${game.name}" class="game-image">
+             <div class="game-image-placeholder list-view-placeholder" style="display:none;"></div>` : 
             `<div class="game-image-placeholder list-view-placeholder"></div>`;
       
       // creating the list html layout
@@ -418,6 +420,23 @@ function createGameCard(game, index) {
               <p class="game-payout">Jay's Payout: ${game.jaysPayout}</p>
           </div>
       `;
+  }
+  
+  // Add error handling for images after the HTML is set
+  const img = gameCard.querySelector('.game-image');
+  const placeholder = gameCard.querySelector('.game-image-placeholder');
+  
+  if (img && placeholder) {
+      img.addEventListener('error', function() {
+          this.style.display = 'none';
+          placeholder.style.display = 'block';
+          console.log(`Image not found: ${this.src}`);
+      });
+      
+      img.addEventListener('load', function() {
+          placeholder.style.display = 'none';
+          this.style.display = 'block';
+      });
   }
   
   // game is selected by clicking so needs event listener
@@ -549,8 +568,10 @@ function displayGameDetails(gameId) {
   
   // Create image HTML if there's an image
   const imageHTML = game.imagePath ? `
-      <img src="${game.imagePath}" alt="${game.name}" class="game-info-image">
-  ` : '';
+    <img src="${game.imagePath}" alt="${game.name}" class="game-info-image" 
+         onerror="this.style.display='none';" 
+         onload="this.style.display='block';">
+` : '';
   
   gameDetails.innerHTML = `
         <h2>${game.name}</h2>
